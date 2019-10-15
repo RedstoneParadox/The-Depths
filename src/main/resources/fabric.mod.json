@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "thedepths",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "redstoneparadox.thedeptsh.ExampleModKt::init"
+      "redstoneparadox.thedepths.TheDepthsKt::init"
     ]
   },
   "mixins": [
