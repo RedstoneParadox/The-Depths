@@ -37,7 +37,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
             ), entity.velocity, 0
         )
     }
-    .buildAndRegister(id("thedepths"))
+    .buildAndRegister(id("the_depths"))
 
 @Suppress("unused")
 fun init() {
