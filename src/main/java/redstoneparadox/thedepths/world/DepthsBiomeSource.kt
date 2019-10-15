@@ -7,19 +7,20 @@ import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.Biomes
 import net.minecraft.world.biome.source.BiomeSource
 import net.minecraft.world.gen.feature.StructureFeature
+import redstoneparadox.thedepths.world.biome.DepthsBiomes
 import java.util.*
 
-class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(Biomes.THE_VOID)) {
+class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_BIOME)) {
 
     val allowedBiomes: Array<Biome> = arrayOf(
-        Biomes.THE_VOID
+        DepthsBiomes.DEPTHS_BIOME
     );
 
     override fun getBiome(x: Int, y: Int, z: Int): Biome =
-        Biomes.THE_VOID
+        DepthsBiomes.DEPTHS_BIOME
 
     override fun locateBiome(x: Int, y: Int, z: Int, range: Int, biomes: MutableList<Biome>, random: Random): BlockPos =
-        BlockPos.ORIGIN
+        BlockPos(x, y, z)
 
     override fun hasStructureFeature(feature: StructureFeature<*>): Boolean = false
 
