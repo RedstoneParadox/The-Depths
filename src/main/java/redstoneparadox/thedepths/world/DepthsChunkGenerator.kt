@@ -15,7 +15,7 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
     val BEDROCK = Blocks.BEDROCK.defaultState
     val STONE = Blocks.STONE.defaultState
 
-    val pitNoiseSampler: PitNoiseSampler = PitNoiseSampler(world.seed, 0.3, 32.0)
+    val pitNoiseSampler: PitNoiseSampler = PitNoiseSampler(world.seed, 0.35, 32.0)
 
     override fun buildSurface(region: ChunkRegion, chunk: Chunk) {
         buildBedrock(chunk)

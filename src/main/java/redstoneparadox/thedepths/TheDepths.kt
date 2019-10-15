@@ -1,6 +1,5 @@
 package redstoneparadox.thedepths
 
-import com.github.draylar.worldtraveler.api.biomes.BiomeBuilder
 import com.github.draylar.worldtraveler.api.dimension.DimensionBuilder
 import com.github.draylar.worldtraveler.api.dimension.utils.FogColorCalculator
 import com.github.draylar.worldtraveler.api.dimension.utils.SkyAngleCalculator
@@ -11,6 +10,7 @@ import net.minecraft.util.math.Vec3d
 import redstoneparadox.thedepths.world.DepthsBiomeSource
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
+import redstoneparadox.thedepths.world.biome.DepthsBiomes
 
 
 val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
@@ -41,6 +41,8 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
 
 @Suppress("unused")
 fun init() {
+    DepthsBiomes.init()
+
     println("Hello Fabric world!")
 }
 
