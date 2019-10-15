@@ -34,7 +34,7 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
         for (x in 0..15) {
             for (z in 0..15) {
                 chunk.setBlockState(BlockPos(x, 0, z), BEDROCK, true)
-                //chunk.setBlockState(BlockPos(x, 255, z), BEDROCK, true)
+                chunk.setBlockState(BlockPos(x, 255, z), BEDROCK, true)
             }
         }
     }

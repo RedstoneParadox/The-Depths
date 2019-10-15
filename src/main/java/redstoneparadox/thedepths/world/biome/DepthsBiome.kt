@@ -19,6 +19,6 @@ class DepthsBiome : Biome(
 ) {
 
     init {
-        this.addSpawn(EntityCategory.MONSTER, Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
+        this.addSpawn(EntityCategory.MONSTER, SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
     }
 }

@@ -17,7 +17,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
     .skyLight(false)
     .factory { world, type ->
         DimensionBuilder()
-            .renderFog(false)
+            .renderFog(true)
             .fogColor(FogColorCalculator.DEFAULT)
             .visibleSky(false)
             .skyAngle(SkyAngleCalculator.DEFAULT)
@@ -53,8 +53,8 @@ fun getLightLevels(): FloatArray {
 
     for (i in 0..15) {
         val lightLevel = 1.0f - i.toFloat() / 15.0f
-        //lightLevels[i] = (1.0f - lightLevel) / (lightLevel * 3.0f + 1.0f) * 1.0f + 0.0f
-        lightLevels[i] = 1.0f
+        lightLevels[i] = (1.0f - lightLevel) / (lightLevel * 3.0f + 1.0f) * 1.0f + 0.0f
+        //lightLevels[i] = 1.0f
     }
 
     return lightLevels
