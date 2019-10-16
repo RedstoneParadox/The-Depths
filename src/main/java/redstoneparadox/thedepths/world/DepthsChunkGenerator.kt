@@ -43,8 +43,8 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
         for (x in 0..15) {
             for (z in 0..15) {
                 val absolutePos = chunk.pos.toBlockPos(x, 0, z)
-                if (!pitNoiseSampler.isPit(absolutePos.x, absolutePos.z)) {
-                    for (y in 64..254) {
+                for (y in 0..255) {
+                    if (pitNoiseSampler.isStone(absolutePos.x, y, absolutePos.z)) {
                         chunk.setBlockState(BlockPos(x, y, z), STONE, true)
                     }
                 }
