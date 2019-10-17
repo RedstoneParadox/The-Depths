@@ -8,6 +8,7 @@ import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import redstoneparadox.thedepths.block.DepthsBlocks
+import redstoneparadox.thedepths.items.DepthsItems
 import redstoneparadox.thedepths.world.biome.DepthsBiomeSource
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
@@ -44,6 +45,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
 fun init() {
     DepthsBiomes.init()
     DepthsBlocks.init()
+    DepthsItems.init()
 
     println("Hello Fabric world!")
 }
