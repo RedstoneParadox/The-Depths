@@ -17,7 +17,7 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
     val BEDROCK = Blocks.BEDROCK.defaultState
     val STONE = DepthsBlocks.DEEP_ROCK.defaultState
 
-    val pitNoiseSampler: PitNoiseSampler = PitNoiseSampler(world.seed, 0.4, 24.0)
+    val pitNoiseSampler: PitNoiseSampler = PitNoiseSampler(world.seed, 0.5, 32.0)
 
     val deepRockNoise: OpenSimplexNoise = OpenSimplexNoise(world.seed)
 

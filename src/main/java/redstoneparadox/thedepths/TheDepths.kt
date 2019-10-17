@@ -8,7 +8,7 @@ import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
 import redstoneparadox.thedepths.block.DepthsBlocks
-import redstoneparadox.thedepths.world.DepthsBiomeSource
+import redstoneparadox.thedepths.world.biome.DepthsBiomeSource
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
 import redstoneparadox.thedepths.world.biome.DepthsBiomes
@@ -24,7 +24,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
             .skyAngle(SkyAngleCalculator.DEFAULT)
             .setChunkGenerator(
                 DepthsChunkGeneratorType.INSTANCE.create(world,
-                DepthsBiomeSource(world.seed), DepthsChunkGeneratorConfig()
+                    DepthsBiomeSource(world.seed), DepthsChunkGeneratorConfig()
             ))
             .setLightLevelsToBrightness(getLightLevels())
             .build(world, type)
