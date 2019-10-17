@@ -32,7 +32,7 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
                 for (y in 0..255) {
                     val pos = blockPos.set(chunkStartX + x, y, chunkStartZ + z)
                     val biome = region.getBiome(pos)
-                    biome.buildSurface(rand, chunk, pos.x, pos.y, pos.z, 0.0, config.defaultBlock, config.defaultFluid, seaLevel, seed)
+                    biome.buildSurface(rand, chunk, x, y, z, 0.0, config.defaultBlock, config.defaultFluid, seaLevel, seed)
                 }
             }
         }
