@@ -14,6 +14,7 @@ import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
 import redstoneparadox.thedepths.world.biome.DepthsBiomes
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
+import kotlin.math.absoluteValue
 
 
 val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
@@ -64,6 +65,12 @@ fun getLightLevels(): FloatArray {
     }
 
     return lightLevels
+}
+
+fun offsetSeed(seed: Long, offset: Int): Long {
+    val absOffset = offset.absoluteValue.toLong()
+    if (seed == Long.MAX_VALUE) return Long.MIN_VALUE
+    return seed + absOffset
 }
 
 

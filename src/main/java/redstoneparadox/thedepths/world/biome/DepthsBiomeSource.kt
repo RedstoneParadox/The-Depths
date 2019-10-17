@@ -1,24 +1,41 @@
 package redstoneparadox.thedepths.world.biome
 
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.util.math.BlockPos
 import net.minecraft.world.biome.Biome
-import net.minecraft.world.biome.Biomes
 import net.minecraft.world.biome.source.BiomeSource
 import net.minecraft.world.gen.feature.StructureFeature
-import redstoneparadox.thedepths.world.biome.DepthsBiomes
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_BIOME, DepthsBiomes.LUMA_BIOME)) {
+
+    val biomeRangeMap: HashMap<Int, ArrayList<Biome>> = hashMapOf()
+
+    init {
+        addBiomeRange(0..227, DepthsBiomes.DEPTHS_BIOME)
+        addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
+    }
 
     override fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
         return getBiome(x * 4, y * 4, z * 4)
     }
 
-    fun getBiome(x: Int, y: Int, z: Int): Biome {
-        return if (y >= 228) {DepthsBiomes.LUMA_BIOME} else {DepthsBiomes.DEPTHS_BIOME}
+    private fun getBiome(x: Int, y: Int, z: Int): Biome {
+        return if (biomeRangeMap.containsKey(y)) {
+            biomeRangeMap[y]!![0]
+        } else { DepthsBiomes.DEPTHS_BIOME }
     }
 
     override fun hasStructureFeature(feature: StructureFeature<*>): Boolean = false
+
+    fun addBiomeRange(range: IntRange, vararg biomes: Biome) {
+        for (i in range) {
+            if (i !in 0..255) throw IllegalArgumentException("Biomes must be between the top and bottom of the world!")
+
+            if (!biomeRangeMap.containsKey(i)) biomeRangeMap[i] = arrayListOf()
+            val list = biomeRangeMap[i]!!
+            for (biome in biomes) {
+                list.add(biome)
+            }
+        }
+    }
 }
