@@ -58,8 +58,8 @@ class DepthsChunkGenerator(world: IWorld, biomeSource: BiomeSource, config: Dept
     }
 
     private fun sampleDeepRockNoise(x: Int, y: Int, z: Int): Boolean {
-        val stretch = 4.0
-        val cutoff = 0.2
+        val stretch = 12.0
+        val cutoff = 0.5
         return deepRockNoise.eval(x.toDouble()/stretch, y.toDouble()/stretch, z.toDouble()/stretch) < cutoff
     }
 }
