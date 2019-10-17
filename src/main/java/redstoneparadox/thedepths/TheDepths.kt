@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Vec3d
+import redstoneparadox.thedepths.block.DepthsBlocks
 import redstoneparadox.thedepths.world.DepthsBiomeSource
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
@@ -42,6 +43,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
 @Suppress("unused")
 fun init() {
     DepthsBiomes.init()
+    DepthsBlocks.init()
 
     println("Hello Fabric world!")
 }
