@@ -13,6 +13,7 @@ import redstoneparadox.thedepths.world.biome.DepthsBiomeSource
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
 import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
 import redstoneparadox.thedepths.world.biome.DepthsBiomes
+import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
 
 
 val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
@@ -43,6 +44,7 @@ val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
 
 @Suppress("unused")
 fun init() {
+    DepthsSurfaceBuilders.init()
     DepthsBiomes.init()
     DepthsBlocks.init()
     DepthsItems.init()

@@ -8,10 +8,12 @@ import net.minecraft.world.gen.decorator.Decorator
 import net.minecraft.world.gen.feature.Feature
 
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder
+import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
+import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceConfig
 
 class LumaBiome: Biome(
     Settings()
-        .configureSurfaceBuilder(SurfaceBuilder.NOPE, SurfaceBuilder.AIR_CONFIG)
+        .configureSurfaceBuilder(DepthsSurfaceBuilders.DEPTHS, DepthsSurfaceConfig.DEFAULT)
         .precipitation(Precipitation.NONE)
         .category(Category.NONE)
         .depth(0.0f)
