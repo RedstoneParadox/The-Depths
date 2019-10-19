@@ -36,13 +36,13 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
         seed: Long,
         config: T
     ) {
-        val primaryStone = config.underMaterial
+        val primaryStone = config.primaryStone
         val secondaryStone = config.secondaryStone
 
         buildBedrock(chunk, x, y, z)
         if (chunk.getBlockState(BlockPos(x, y, z)).isAir) {
             if (y >= 64) buildPits(chunk, primaryStone, secondaryStone, x, y, z)
-            else buildLowerSurface(chunk, primaryStone, secondaryStone, x, y, z)
+            else buildLowerSurface(chunk, primaryStone, secondaryStone, x, y, z, config.floorMinHeight, config.floorMaxHeight)
         }
     }
 
@@ -69,14 +69,14 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
         }
     }
 
-    private fun buildLowerSurface(chunk: Chunk, primaryStone: BlockState, secondaryStone: BlockState, x: Int, y: Int, z: Int) {
+    private fun buildLowerSurface(chunk: Chunk, primaryStone: BlockState, secondaryStone: BlockState, x: Int, y: Int, z: Int, minHeight: Int, maxHeight: Int) {
         val absolutePos = chunk.pos.toBlockPos(x, y, z)
         val state = if (sampleDeepRockNoise(absolutePos.x, y, absolutePos.z)) {primaryStone} else {secondaryStone}
 
-        if (y <= 15) {
+        if (y < minHeight) {
             chunk.setBlockState(BlockPos(x, y, z), state, true)
         }
-        else if (y in 16..18) {
+        else if (y in minHeight..maxHeight) {
             val height = lowerSurfaceNoise!!.eval(absolutePos.x, absolutePos.z)
             if (y <= height.toInt() + 16) chunk.setBlockState(BlockPos(x, y, z), state, true)
         }

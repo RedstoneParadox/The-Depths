@@ -13,7 +13,7 @@ import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceConfig
 
 class LumaBiome: Biome(
     Settings()
-        .configureSurfaceBuilder(DepthsSurfaceBuilders.DEPTHS, DepthsSurfaceConfig.DEFAULT)
+        .configureSurfaceBuilder(DepthsSurfaceBuilders.DEPTHS, DepthsSurfaceConfig())
         .precipitation(Precipitation.NONE)
         .category(Category.NONE)
         .depth(0.0f)
