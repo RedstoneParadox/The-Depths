@@ -16,3 +16,6 @@ out/
 run/
 minecraft/
 *.kra~
+
+# other
+classes/
