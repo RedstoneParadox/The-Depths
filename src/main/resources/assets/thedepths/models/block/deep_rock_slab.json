@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "thedepths:block/deep_rock",
+    "top": "thedepths:block/deep_rock",
+    "side": "thedepths:block/deep_rock"
+  }
+}

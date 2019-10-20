@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "thedepths:block/deep_rock_brick_slab" },
+    "type=top": { "model": "thedepths:block/deep_rock_brick_slab_top" },
+    "type=double": { "model": "thedepths:block/deep_rock_bricks" }
+  }
+}

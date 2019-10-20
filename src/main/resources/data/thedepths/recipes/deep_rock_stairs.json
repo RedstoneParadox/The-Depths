@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "thedepths:deep_rock"
+  },
+  "result": "thedepths:deep_rock_stairs",
+  "count": 1
+}
