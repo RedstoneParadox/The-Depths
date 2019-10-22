@@ -1,0 +1,21 @@
+{
+  "parent": "jmx:block/jmx_cube_all",
+  "textures": {
+    "all": "thedepths:block/red_crystal"
+  },
+  "jmx": {
+    "textures": {
+      "jmx_tex_particle": "thedepths:block/red_crystal",
+      "jmx_tex_all0": "thedepths:block/red_crystal",
+      "jmx_tex_all1": "thedepths:block/red_crystal"
+    },
+    "materials": {
+      "jmx_mat_all": {
+        "layer1": "solid",
+        "emissive1": true,
+        "ambient_occlusion1": false,
+        "diffuse1": false
+      }
+    }
+  }
+}

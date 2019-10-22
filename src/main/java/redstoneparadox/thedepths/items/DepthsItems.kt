@@ -15,6 +15,8 @@ object DepthsItems: ItemsInitializer() {
     val DEEP_ROCK_BRICK_STAIRS: BlockItem = BlockItem(DepthsBlocks.DEEP_ROCK_BRICK_STAIRS, Item.Settings().group(ItemGroup.BUILDING_BLOCKS))
     val DEEP_ROCK_BRICK_WALL: BlockItem = BlockItem(DepthsBlocks.DEEP_ROCK_BRICK_WALL, Item.Settings().group(ItemGroup.DECORATIONS))
 
+    val RED_CRYSTAL: BlockItem = BlockItem(DepthsBlocks.RED_CRYSTAL, Item.Settings().group(ItemGroup.DECORATIONS))
+
     fun init() {
         register("deep_rock", DEEP_ROCK)
         register("deep_rock_slab", DEEP_ROCK_SLAB)
@@ -23,5 +25,7 @@ object DepthsItems: ItemsInitializer() {
         register("deep_rock_brick_slab", DEEP_ROCK_BRICK_SLAB)
         register("deep_rock_brick_stairs", DEEP_ROCK_BRICK_STAIRS)
         register("deep_rock_brick_wall", DEEP_ROCK_BRICK_WALL)
+
+        register("red_crystal", RED_CRYSTAL)
     }
 }
