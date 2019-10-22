@@ -21,6 +21,14 @@ repositories {
         name = 'JitPack'
         url = 'https://jitpack.io'
     }
+    maven {
+        name = "grondag"
+        url = "https://grondag-repo.appspot.com"
+        credentials {
+            username "guest"
+            password ""
+        }
+    }
 }
 
 dependencies {
@@ -39,6 +47,8 @@ dependencies {
     modImplementation("com.github.Draylar:world-traveler:1.0.4") {
         transitive = false
     }
+
+    modImplementation 'grondag:jmx:1.1.69+19w39a'
 }
 
 processResources {
