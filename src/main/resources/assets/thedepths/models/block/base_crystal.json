@@ -1,0 +1,21 @@
+{
+  "parent": "jmx:block/jmx_cube_all",
+  "textures": {
+    "all": "#crystal"
+  },
+  "jmx": {
+    "textures": {
+      "jmx_tex_particle": "#crystal",
+      "jmx_tex_all0": "#crystal",
+      "jmx_tex_all1": "#crystal"
+    },
+    "materials": {
+      "jmx_mat_all": {
+        "layer1": "solid",
+        "emissive1": true,
+        "ambient_occlusion1": false,
+        "diffuse1": false
+      }
+    }
+  }
+}

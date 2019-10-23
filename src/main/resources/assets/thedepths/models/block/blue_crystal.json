@@ -1,6 +1,6 @@
 {
   "parent": "thedepths:block/base_crystal",
   "textures": {
-    "crystal": "thedepths:block/red_crystal"
+    "crystal": "thedepths:block/blue_crystal"
   }
 }
