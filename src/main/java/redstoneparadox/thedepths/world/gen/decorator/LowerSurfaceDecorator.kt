@@ -15,7 +15,7 @@ import java.util.stream.Stream
 class LowerSurfaceDecorator(func: Function<Dynamic<*>, out LowerSurfaceDecoratorConfig>): Decorator<LowerSurfaceDecoratorConfig>(func) {
 
     override fun getPositions(world: IWorld, chunkGenerator: ChunkGenerator<out ChunkGeneratorConfig>, random: Random, config: LowerSurfaceDecoratorConfig, pos: BlockPos): Stream<BlockPos> {
-        val startPos = BlockPos.Mutable(pos.x, 0, pos.z)
+        val startPos = BlockPos.Mutable(pos.x + random.nextInt(15), 0, pos.z + random.nextInt(15))
 
         while (!world.getBlockState(startPos).isAir) {
             startPos.y += 1
