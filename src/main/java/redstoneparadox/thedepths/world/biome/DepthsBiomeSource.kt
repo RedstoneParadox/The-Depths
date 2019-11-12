@@ -20,11 +20,9 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
 
     init {
         addBiomeRange(0..227, DepthsBiomes.DEPTHS_BIOME)
-        addBiomeRange(0..63, DepthsBiomes.CRYSTAL_BIOME)
+        // addBiomeRange(0..63, DepthsBiomes.CRYSTAL_BIOME)
         addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
     }
-
-
 
     override fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
         return getBiome(x * 4, y * 4, z * 4)
