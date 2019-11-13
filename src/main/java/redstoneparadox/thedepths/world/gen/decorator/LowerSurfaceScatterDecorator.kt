@@ -18,7 +18,6 @@ class LowerSurfaceScatterDecorator(func: Function<Dynamic<*>, out LowerSurfaceSc
             finalStream = Stream.of(finalStream, super.getPositions(world, chunkGenerator, random, config, pos)).flatMap { foo -> foo }
         }
 
-        println(finalStream)
         return finalStream
     }
 

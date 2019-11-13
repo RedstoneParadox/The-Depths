@@ -16,17 +16,17 @@ import java.util.stream.Stream
 open class LowerSurfaceDecorator<DC: LowerSurfaceDecoratorConfig>(func: Function<Dynamic<*>, out DC>): Decorator<DC>(func) {
 
     override fun getPositions(world: IWorld, chunkGenerator: ChunkGenerator<out ChunkGeneratorConfig>, random: Random, config: DC, pos: BlockPos): Stream<BlockPos> {
-        println("Starting with position $pos")
         val startPos = BlockPos.Mutable(pos.x + random.nextInt(15), pos.y, pos.z + random.nextInt(15))
+        val biome = world.getBiome(startPos)
 
         if (world.getBlockState(pos).isAir) {
-            while (world.getBlockState(startPos).isAir) {
+            while (world.getBlockState(startPos).isAir && world.getBiome(startPos) == biome) {
                 startPos.y -= 1
             }
             startPos.y += 1
         }
         else {
-            while (!world.getBlockState(startPos).isAir) {
+            while (!world.getBlockState(startPos).isAir && world.getBiome(startPos) == biome) {
                 startPos.y += 1
             }
         }
