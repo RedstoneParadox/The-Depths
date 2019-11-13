@@ -24,6 +24,6 @@ class MossBlock: Block(FabricBlockSettings.copy(Blocks.OAK_LEAVES).build()) {
     }
 
     override fun canPlaceAt(state: BlockState, worldView: WorldView, pos: BlockPos): Boolean {
-        return !worldView.isAir(pos.method_10074())
+        return worldView.getBlockState(pos.down(1)).isSimpleFullBlock(worldView, pos.down(1)) && worldView.getBlockState(pos).isAir
     }
 }

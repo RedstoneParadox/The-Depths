@@ -12,7 +12,6 @@ import java.util.stream.Stream
 class LowerSurfaceScatterDecorator(func: Function<Dynamic<*>, out LowerSurfaceScatterDecoratorConfig>): LowerSurfaceDecorator<LowerSurfaceScatterDecoratorConfig>(func) {
 
     override fun getPositions(world: IWorld, chunkGenerator: ChunkGenerator<out ChunkGeneratorConfig>, random: Random, config: LowerSurfaceScatterDecoratorConfig, pos: BlockPos): Stream<BlockPos> {
-        println("Decorating at $pos")
         var finalStream = arrayListOf<BlockPos>().stream()
 
         for (i in 0..config.count) {
