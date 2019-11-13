@@ -17,6 +17,8 @@ object DepthsBlocks: BlocksInitializer() {
     val BLUE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE).build())
     val WHITE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE).build())
 
+    val MOSS: MossBlock = MossBlock()
+
     fun init() {
         register("deep_rock", DEEP_ROCK)
         register("deep_rock_slab", DEEP_ROCK_SLAB)
@@ -29,5 +31,7 @@ object DepthsBlocks: BlocksInitializer() {
         register("red_crystal", RED_CRYSTAL)
         register("blue_crystal", BLUE_CRYSTAL)
         register("white_crystal", WHITE_CRYSTAL)
+
+        register("moss", MOSS)
     }
 }

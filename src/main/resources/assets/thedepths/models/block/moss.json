@@ -1,0 +1,7 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "particle": "thedepths:block/moss",
+    "wool": "thedepths:block/moss"
+  }
+}

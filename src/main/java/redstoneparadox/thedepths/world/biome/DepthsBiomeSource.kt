@@ -7,6 +7,7 @@ import redstoneparadox.thedepths.world.noise.OpenSimplexSampler
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.absoluteValue
+import kotlin.math.floor
 import kotlin.math.roundToInt
 
 class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_BIOME, DepthsBiomes.LUMA_BIOME)) {
@@ -21,7 +22,9 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
     init {
         addBiomeRange(0..227, DepthsBiomes.DEPTHS_BIOME)
         // addBiomeRange(0..63, DepthsBiomes.CRYSTAL_BIOME)
-        addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
+        // addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
+        addBiomeRange(228..255, DepthsBiomes.FUNGAL_BLANKET_BIOME)
+        addBiomeRange(0..63, DepthsBiomes.FUNGAL_BLANKET_BIOME)
     }
 
     override fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
@@ -31,7 +34,7 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
     private fun getBiome(x: Int, y: Int, z: Int): Biome {
         return if (biomeRangeMap.containsKey(y)) {
             val biomes = biomeRangeMap[y]!!
-            biomes[getIndex(x, z, biomes.size - 1)]
+            biomes[getIndex(x, z, biomes.size)]
         } else { DepthsBiomes.DEPTHS_BIOME }
     }
 
@@ -49,5 +52,5 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
         }
     }
 
-    private fun getIndex(x: Int, z: Int, maxIndex: Int): Int = (simplexSampler.eval(x, z).absoluteValue * maxIndex).roundToInt()
+    private fun getIndex(x: Int, z: Int, maxIndex: Int): Int = floor((simplexSampler.eval(x, z).absoluteValue * maxIndex)).roundToInt()
 }
