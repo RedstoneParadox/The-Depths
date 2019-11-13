@@ -32,7 +32,7 @@ class FungalBlanketBiome: Biome(
                 ScatterFeatureConfig(DepthsBlocks.MOSS.defaultState)
             ).method_23388(
                 DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
-                    LowerSurfaceScatterDecoratorConfig(128)
+                    LowerSurfaceScatterDecoratorConfig(256)
                 )
             )
         )
@@ -43,7 +43,7 @@ class FungalBlanketBiome: Biome(
                 ScatterFeatureConfig(Blocks.BROWN_MUSHROOM.defaultState)
             ).method_23388(
                 DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
-                    LowerSurfaceScatterDecoratorConfig(64)
+                    LowerSurfaceScatterDecoratorConfig(16)
                 )
             )
         )
@@ -54,7 +54,7 @@ class FungalBlanketBiome: Biome(
                 ScatterFeatureConfig(Blocks.RED_MUSHROOM.defaultState)
             ).method_23388(
                 DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
-                    LowerSurfaceScatterDecoratorConfig(64)
+                    LowerSurfaceScatterDecoratorConfig(16)
                 )
             )
         )
