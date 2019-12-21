@@ -8,6 +8,7 @@ import redstoneparadox.thedepths.block.DepthsBlocks
 open class DepthsSurfaceConfig(
     val primaryStone: BlockState = DepthsBlocks.DEEP_ROCK.defaultState,
     val secondaryStone: BlockState = Blocks.STONE.defaultState,
+    val cover: BlockState? = null,
     val fluid: BlockState? = null,
     val floorMinHeight: Int = 16,
     val floorMaxHeight: Int = 18

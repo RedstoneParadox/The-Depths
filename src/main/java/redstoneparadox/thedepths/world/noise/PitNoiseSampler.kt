@@ -3,6 +3,7 @@ package redstoneparadox.thedepths.world.noise
 import kotlin.math.PI
 import kotlin.math.cos
 
+@Deprecated("This logic should be moved to the surface builder")
 class PitNoiseSampler(seed: Long, private val cutoff: Double, private val strechFactor: Double) {
 
     private val simplexNoise: OpenSimplexNoise = OpenSimplexNoise(seed)

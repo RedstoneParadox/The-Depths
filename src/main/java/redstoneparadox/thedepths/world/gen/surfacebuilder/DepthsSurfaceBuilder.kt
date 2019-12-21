@@ -42,8 +42,8 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
 
         buildBedrock(chunk, x, y, z)
         if (chunk.getBlockState(BlockPos(x, y, z)).isAir) {
-            if (y >= 64) buildPits(chunk, primaryStone, secondaryStone, x, y, z)
-            else buildLowerSurface(chunk, primaryStone, secondaryStone, liquid, x, y, z, config.floorMinHeight, config.floorMaxHeight)
+            if (y >= 64) buildPits(chunk, primaryStone, secondaryStone, config.cover, x, y, z)
+            else buildLowerSurface(chunk, primaryStone, secondaryStone, liquid, config.cover, x, y, z, config.floorMinHeight, config.floorMaxHeight)
         }
     }
 
@@ -54,7 +54,7 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
             seed = offsetSeed(seed, 1),
             xStrech = 32.0,
             zStrech = 32.0,
-            noiseMultiplier = 3.0
+            noiseMultiplier = 4.0
         )
     }
 
@@ -62,15 +62,18 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
         if (y == 0 || y == 255) chunk.setBlockState(BlockPos(x, y, z), BEDROCK, true)
     }
 
-    private fun buildPits(chunk: Chunk, primary: BlockState, secondary: BlockState, x: Int, y: Int, z: Int) {
+    private fun buildPits(chunk: Chunk, primary: BlockState, secondary: BlockState, cover: BlockState?, x: Int, y: Int, z: Int) {
         val absolutePos = chunk.pos.toBlockPos(x, y, z)
         if (pitSampler!!.isStone(absolutePos.x, y, absolutePos.z)) {
             val state = if (sampleDeepRockNoise(absolutePos.x, y, absolutePos.z)) {primary} else {secondary}
             chunk.setBlockState(BlockPos(x, y, z), state, true)
         }
+        else if (y in 232..247 && cover != null && pitSampler!!.isStone(absolutePos.x, y - 1, absolutePos.z)) {
+            chunk.setBlockState(BlockPos(x, y, z), cover, true)
+        }
     }
 
-    private fun buildLowerSurface(chunk: Chunk, primaryStone: BlockState, secondaryStone: BlockState, liquid: BlockState?, x: Int, y: Int, z: Int, minHeight: Int, maxHeight: Int) {
+    private fun buildLowerSurface(chunk: Chunk, primaryStone: BlockState, secondaryStone: BlockState, liquid: BlockState?, cover: BlockState?, x: Int, y: Int, z: Int, minHeight: Int, maxHeight: Int) {
         val absolutePos = chunk.pos.toBlockPos(x, y, z)
         val state = if (sampleDeepRockNoise(absolutePos.x, y, absolutePos.z)) {primaryStone} else {secondaryStone}
 
@@ -80,6 +83,7 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(function_1: Function<Dynamic<
         else if (y in minHeight..maxHeight) {
             val height = lowerSurfaceNoise!!.eval(absolutePos.x, absolutePos.z)
             if (y <= height.toInt() + minHeight) chunk.setBlockState(BlockPos(x, y, z), state, true)
+            else if (y <= height.toInt() + 1 + minHeight && cover != null) chunk.setBlockState(BlockPos(x, y, z), cover, true)
             else if (y < 16 && liquid != null) chunk.setBlockState(BlockPos(x, y, z), liquid, true)
         }
     }
