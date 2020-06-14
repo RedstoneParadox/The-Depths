@@ -1,4 +1,4 @@
-package redstoneparadox.thedepths.mixin;
+package io.github.redstoneparadox.thedepths.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;

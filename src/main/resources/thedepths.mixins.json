@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "redstoneparadox.thedepths.mixin",
+  "package": "io.github.redstoneparadox.thedepths.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "client.render.AccessorSkyProperties"

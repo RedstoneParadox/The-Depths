@@ -21,13 +21,13 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "redstoneparadox.thedepths.TheDepths"
+        "value": "io.github.redstoneparadox.thedepths.TheDepths"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "redstoneparadox.thedepths.client.TheDepthsClient"
+        "value": "io.github.redstoneparadox.thedepths.client.TheDepthsClient"
       }
     ]
   },
