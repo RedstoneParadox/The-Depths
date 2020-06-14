@@ -7,6 +7,7 @@ import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.BiomeEffects
 import net.minecraft.world.gen.GenerationStep
 import redstoneparadox.thedepths.block.DepthsBlocks
+import redstoneparadox.thedepths.id
 import redstoneparadox.thedepths.world.gen.decorator.DepthsDecorators
 import redstoneparadox.thedepths.world.gen.decorator.LowerSurfaceDecoratorConfig
 import redstoneparadox.thedepths.world.gen.feature.CrystalColumnFeatureConfig
@@ -30,7 +31,6 @@ class CrystalBiome: Biome(
         .parent("null")
 ){
 
-    //TODO: Make this end well.
     init {
         this.addSpawn(SpawnGroup.MONSTER, SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
 
@@ -43,7 +43,8 @@ class CrystalBiome: Biome(
                         2,
                         0.1,
                         1f,
-                        Registry.BIOME.getId(this)!!
+                        //TODO: There should only be one place to get this.
+                        id("crystal")
                     )
                 ).createDecoratedFeature(
                     DepthsDecorators.LOWER_SURFACE.configure(LowerSurfaceDecoratorConfig(i, 0.1))
