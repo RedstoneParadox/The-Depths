@@ -16,6 +16,7 @@ import net.minecraft.world.gen.GenerationStep
 import net.minecraft.world.gen.StructureAccessor
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import net.minecraft.world.gen.chunk.StructuresConfig
+import net.minecraft.world.gen.chunk.VerticalBlockSample
 
 class DepthsChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSource, StructuresConfig(false)) {
 
@@ -42,17 +43,18 @@ class DepthsChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSource
 
 
     override fun getColumnSample(i: Int, j: Int): BlockView {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return VerticalBlockSample(arrayOf())
     }
 
     override fun getHeightOnGround(x: Int, z: Int, heightMapType: Heightmap.Type): Int = 64
 
     override fun method_28506(): Codec<out ChunkGenerator> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return CODEC
     }
 
+    //TODO: Figure out the proper return value.
     override fun getHeight(i: Int, j: Int, type: Heightmap.Type?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return 255
     }
 
     override fun getSpawnHeight(): Int = 64
@@ -62,7 +64,7 @@ class DepthsChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSource
     }
 
     override fun withSeed(l: Long): ChunkGenerator {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return DepthsChunkGenerator(biomeSource.withSeed(l))
     }
 
     override fun generateFeatures(chunkRegion: ChunkRegion, structureAccessor: StructureAccessor) {
@@ -106,7 +108,7 @@ class DepthsChunkGenerator(biomeSource: BiomeSource): ChunkGenerator(biomeSource
     companion object {
         val CODEC: Codec<DepthsChunkGenerator> = RecordCodecBuilder.create { instance ->
             instance.group(
-                BiomeSource.field_24713.fieldOf("biomeSource").forGetter { generator -> return@forGetter generator.biomeSource }
+                BiomeSource.field_24713.fieldOf("biome_source").forGetter { generator -> return@forGetter generator.biomeSource }
             ).apply(instance, ::DepthsChunkGenerator)
         }
     }

@@ -44,7 +44,15 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
-    modImplementation "grondag:jmx-mc116:${project.jmx}"
+    /*
+    modApi ("grondag:frex-${project.mc_tag}:${project.frex}.+") { transitive = false}
+    // remove next line if you want JMX to be an optional dependency
+    include "grondag:frex-${project.mc_tag}:${project.frex}.+"
+
+    modImplementation ("grondag:jmx-${project.mc_tag}:${project.jmx}.+") { transitive = false}
+    // remove next line if you want JMX to be an optional dependency
+    include "grondag:jmx-${project.mc_tag}:${project.jmx}.+"
+     */
 }
 
 processResources {

@@ -49,7 +49,7 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(mutableListOf(DepthsBiomes.
     }
 
     override fun method_28442(): Codec<out BiomeSource> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return CODEC
     }
 
     override fun withSeed(l: Long): BiomeSource {

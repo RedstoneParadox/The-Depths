@@ -1,5 +1,5 @@
 {
-  "parent": "jmx:block/jmx_cube_all",
+  "parent": "block/cube_all",
   "textures": {
     "all": "#crystal"
   },

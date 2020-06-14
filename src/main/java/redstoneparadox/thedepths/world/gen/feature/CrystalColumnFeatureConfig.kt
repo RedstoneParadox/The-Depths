@@ -9,17 +9,17 @@ import net.minecraft.world.biome.Biome
 import net.minecraft.world.gen.feature.FeatureConfig
 
 class CrystalColumnFeatureConfig(val crystal: BlockState, val stone: BlockState, val radius: Int, val genChance: Double, val crystalChance: Float, biomeID: Identifier): FeatureConfig {
-    val biome: Biome = Registry.BIOME[biomeID]!!
+    val biome: Biome by lazy { Registry.BIOME[biomeID]!! }
 
     companion object {
         val CODEC: Codec<CrystalColumnFeatureConfig> = RecordCodecBuilder.create { instance ->
             return@create instance.group(
-                BlockState.CODEC.fieldOf("crystal").forGetter { config -> return@forGetter config.crystal },
-                BlockState.CODEC.fieldOf("stone").forGetter { config -> return@forGetter config.stone },
-                Codec.INT.fieldOf("radius").forGetter { config -> return@forGetter config.radius },
-                Codec.DOUBLE.fieldOf("genChance").forGetter { config -> return@forGetter config.genChance },
-                Codec.FLOAT.fieldOf("crystalChance").forGetter { config -> return@forGetter config.crystalChance },
-                Identifier.CODEC.fieldOf("biomeID").forGetter { config -> return@forGetter Registry.BIOME.getId(config.biome) }
+                BlockState.CODEC.fieldOf("crystal").forGetter { config -> config.crystal },
+                BlockState.CODEC.fieldOf("stone").forGetter { config -> config.stone },
+                Codec.INT.fieldOf("radius").forGetter { config -> config.radius },
+                Codec.DOUBLE.fieldOf("genChance").forGetter { config -> config.genChance },
+                Codec.FLOAT.fieldOf("crystalChance").forGetter { config -> config.crystalChance },
+                Identifier.CODEC.fieldOf("biomeID").forGetter { config -> Registry.BIOME.getId(config.biome) }
             ).apply(instance, ::CrystalColumnFeatureConfig)
         }
     }
