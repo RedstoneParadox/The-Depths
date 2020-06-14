@@ -1,16 +1,17 @@
 package redstoneparadox.thedepths.world.biome
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.source.BiomeSource
 import net.minecraft.world.gen.feature.StructureFeature
 import redstoneparadox.thedepths.world.noise.OpenSimplexSampler
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.absoluteValue
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
-class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_BIOME, DepthsBiomes.LUMA_BIOME)) {
+class DepthsBiomeSource(val seed: Long): BiomeSource(mutableListOf(DepthsBiomes.DEPTHS_BIOME, DepthsBiomes.LUMA_BIOME)) {
 
     val biomeRangeMap: HashMap<Int, ArrayList<Biome>> = hashMapOf()
     val simplexSampler: OpenSimplexSampler = OpenSimplexSampler(
@@ -27,7 +28,7 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
         addBiomeRange(0..63, DepthsBiomes.FUNGAL_BLANKET_BIOME)
     }
 
-    override fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
+    fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
         return getBiome(x * 4, y * 4, z * 4)
     }
 
@@ -39,6 +40,21 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
     }
 
     override fun hasStructureFeature(feature: StructureFeature<*>): Boolean = false
+
+    override fun getBiomeForNoiseGen(x: Int, y: Int, z: Int): Biome {
+        return if (biomeRangeMap.containsKey(y)) {
+            val biomes = biomeRangeMap[y]!!
+            biomes[getIndex(x, z, biomes.size)]
+        } else { DepthsBiomes.DEPTHS_BIOME }
+    }
+
+    override fun method_28442(): Codec<out BiomeSource> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun withSeed(l: Long): BiomeSource {
+        return DepthsBiomeSource(l)
+    }
 
     private fun addBiomeRange(range: IntRange, vararg biomes: Biome) {
         for (i in range) {
@@ -53,4 +69,12 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(setOf(DepthsBiomes.DEPTHS_B
     }
 
     private fun getIndex(x: Int, z: Int, maxIndex: Int): Int = floor((simplexSampler.eval(x, z).absoluteValue * maxIndex)).roundToInt()
+
+    companion object {
+        val CODEC: Codec<DepthsBiomeSource> = RecordCodecBuilder.create {
+            it.group(
+                Codec.LONG.fieldOf("seed").forGetter { source -> source.seed }
+            ).apply(it, ::DepthsBiomeSource)
+        }
+    }
 }

@@ -1,49 +1,15 @@
 package redstoneparadox.thedepths
 
-import com.github.draylar.worldtraveler.api.dimension.DimensionBuilder
-import com.github.draylar.worldtraveler.api.dimension.utils.FogColorCalculator
-import com.github.draylar.worldtraveler.api.dimension.utils.SkyAngleCalculator
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
-import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.Vec3d
+import net.minecraft.util.registry.Registry
 import redstoneparadox.thedepths.block.DepthsBlocks
 import redstoneparadox.thedepths.items.DepthsItems
-import redstoneparadox.thedepths.world.biome.DepthsBiomeSource
-import redstoneparadox.thedepths.world.DepthsChunkGeneratorConfig
-import redstoneparadox.thedepths.world.DepthsChunkGeneratorType
+import redstoneparadox.thedepths.world.DepthsChunkGenerator
 import redstoneparadox.thedepths.world.biome.DepthsBiomes
 import redstoneparadox.thedepths.world.gen.decorator.DepthsDecorators
 import redstoneparadox.thedepths.world.gen.feature.DepthsFeatures
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
 import kotlin.math.absoluteValue
-
-
-val DEPTHS: FabricDimensionType = FabricDimensionType.builder()
-    .skyLight(false)
-    .factory { world, type ->
-        DimensionBuilder()
-            .renderFog(true)
-            .fogColor(FogColorCalculator.DEFAULT)
-            .visibleSky(false)
-            .skyAngle(SkyAngleCalculator.DEFAULT)
-            .setChunkGenerator(
-                DepthsChunkGeneratorType.INSTANCE.create(world,
-                    DepthsBiomeSource(world.seed), DepthsChunkGeneratorConfig()
-            ))
-            .setLightLevelsToBrightness(getLightLevels())
-            .build(world, type)
-    }
-    .defaultPlacer { entity, _, _, _, _ ->
-        BlockPattern.TeleportTarget(
-            Vec3d(
-                entity.x,
-                entity.y,
-                entity.z
-            ), entity.velocity, 0
-        )
-    }
-    .buildAndRegister(id("the_depths"))
 
 @Suppress("unused")
 fun init() {
@@ -53,6 +19,8 @@ fun init() {
     DepthsBiomes.init()
     DepthsBlocks.init()
     DepthsItems.init()
+
+    Registry.register(Registry.CHUNK_GENERATOR, id("depths"), DepthsChunkGenerator.CODEC)
 
     println("Hello Fabric world!")
 }

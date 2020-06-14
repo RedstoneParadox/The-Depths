@@ -2,7 +2,7 @@ package redstoneparadox.thedepths.block
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
-import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.util.registry.Registry
 
@@ -31,7 +31,7 @@ abstract class BlocksInitializer {
         }
     }
 
-    protected fun copySettings(block: Block): Block.Settings {
+    protected fun copySettings(block: Block): AbstractBlock.Settings {
         return FabricBlockSettings.copy(block).build()
     }
 }

@@ -1,17 +1,14 @@
 package redstoneparadox.thedepths.world.gen.decorator
 
-import com.mojang.datafixers.Dynamic
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig
 import java.util.*
-import java.util.function.Function
 import java.util.stream.Stream
 
-class LowerSurfaceScatterDecorator(func: Function<Dynamic<*>, out LowerSurfaceScatterDecoratorConfig>): LowerSurfaceDecorator<LowerSurfaceScatterDecoratorConfig>(func) {
+class LowerSurfaceScatterDecorator: LowerSurfaceDecorator<LowerSurfaceScatterDecoratorConfig>(LowerSurfaceScatterDecoratorConfig.CODEC) {
 
-    override fun getPositions(world: IWorld, chunkGenerator: ChunkGenerator<out ChunkGeneratorConfig>, random: Random, config: LowerSurfaceScatterDecoratorConfig, pos: BlockPos): Stream<BlockPos> {
+    override fun getPositions(world: WorldAccess, chunkGenerator: ChunkGenerator, random: Random, config: LowerSurfaceScatterDecoratorConfig, pos: BlockPos): Stream<BlockPos> {
         var finalStream = arrayListOf<BlockPos>().stream()
 
         for (i in 0..config.count) {

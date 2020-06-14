@@ -1,11 +1,9 @@
 package redstoneparadox.thedepths.world
 
+import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig
 
-class DepthsChunkGeneratorConfig: OverworldChunkGeneratorConfig() {
-    init {
-        defaultBlock = Blocks.STONE.defaultState
-        defaultFluid = Blocks.WATER.defaultState
-    }
+class DepthsChunkGeneratorConfig {
+    var defaultBlock: BlockState = Blocks.STONE.defaultState
+    var defaultFluid: BlockState = Blocks.WATER.defaultState
 }

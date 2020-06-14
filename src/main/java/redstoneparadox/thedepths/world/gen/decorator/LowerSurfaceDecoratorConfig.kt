@@ -1,24 +1,17 @@
 package redstoneparadox.thedepths.world.gen.decorator
 
-import com.mojang.datafixers.Dynamic
-import com.mojang.datafixers.types.DynamicOps
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.world.gen.decorator.DecoratorConfig
 
 open class LowerSurfaceDecoratorConfig(val randOffset: Int, val chance: Double): DecoratorConfig {
 
-    override fun <T : Any> serialize(ops: DynamicOps<T>): Dynamic<T> {
-        return Dynamic(ops, ops.createMap(
-            mapOf(
-                ops.createString("randOffset") to ops.createInt(randOffset),
-                ops.createString("chance") to ops.createDouble(chance)
-            )
-        ))
-    }
-
     companion object {
-
-        fun deserialize(dyn: Dynamic<*>): LowerSurfaceDecoratorConfig {
-            return LowerSurfaceDecoratorConfig(dyn["randOffset"].asInt(0), dyn["chance"].asDouble(0.01))
+        val CODEC: Codec<LowerSurfaceDecoratorConfig> = RecordCodecBuilder.create {
+            it.group(
+                Codec.INT.fieldOf("randOffset").forGetter { config -> config.randOffset },
+                Codec.DOUBLE.fieldOf("chance").forGetter { config -> config.chance }
+            ).apply(it, ::LowerSurfaceDecoratorConfig)
         }
     }
 }

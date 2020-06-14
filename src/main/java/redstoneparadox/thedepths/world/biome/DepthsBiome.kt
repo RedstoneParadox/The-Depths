@@ -1,16 +1,9 @@
 package redstoneparadox.thedepths.world.biome
 
-import net.minecraft.entity.EntityCategory
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.world.biome.Biome
-import net.minecraft.world.gen.GenerationStep
-import net.minecraft.world.gen.decorator.Decorator
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder
-import redstoneparadox.thedepths.block.DepthsBlocks
-import redstoneparadox.thedepths.world.gen.decorator.DepthsDecorators
-import redstoneparadox.thedepths.world.gen.feature.CrystalColumnFeatureConfig
-import redstoneparadox.thedepths.world.gen.feature.DepthsFeatures
+import net.minecraft.world.biome.BiomeEffects
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceConfig
 
@@ -23,11 +16,17 @@ class DepthsBiome : Biome(
         .scale(0.8f)
         .temperature(0.9f)
         .downfall(0.0f)
-        .waterColor(4159204)
-        .waterFogColor(329011)
+        .effects(
+            BiomeEffects.Builder()
+                .fogColor(12638463)
+                .waterColor(4159204)
+                .waterFogColor(329011)
+                .build()
+        )
+        .parent("null")
 ) {
 
     init {
-        this.addSpawn(EntityCategory.MONSTER, SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
+        this.addSpawn(SpawnGroup.MONSTER, SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
     }
 }

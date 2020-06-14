@@ -2,12 +2,12 @@ package redstoneparadox.thedepths.world.biome
 
 import net.minecraft.block.Blocks
 import net.minecraft.world.biome.Biome
+import net.minecraft.world.biome.BiomeEffects
 import net.minecraft.world.gen.GenerationStep
 import redstoneparadox.thedepths.block.DepthsBlocks
 import redstoneparadox.thedepths.world.gen.decorator.DepthsDecorators
 import redstoneparadox.thedepths.world.gen.decorator.LowerSurfaceScatterDecoratorConfig
 import redstoneparadox.thedepths.world.gen.feature.DepthsFeatures
-import redstoneparadox.thedepths.world.gen.feature.NopeFeatureConfig
 import redstoneparadox.thedepths.world.gen.feature.ScatterFeatureConfig
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceConfig
@@ -21,17 +21,23 @@ class FungalBlanketBiome: Biome(
         .scale(0.8f)
         .temperature(0.9f)
         .downfall(0.0f)
-        .waterColor(4159204)
-        .waterFogColor(329011)
+        .effects(
+            BiomeEffects.Builder()
+                .fogColor(12638463)
+                .waterColor(4159204)
+                .waterFogColor(329011)
+                .build()
+        )
+        .parent("null")
 ) {
 
     init {
         this.addFeature(
             GenerationStep.Feature.RAW_GENERATION,
-            DepthsFeatures.MOSS_PATCH.method_23397(
+            DepthsFeatures.MOSS_PATCH.configure(
                 ScatterFeatureConfig(DepthsBlocks.MOSS.defaultState)
-            ).method_23388(
-                DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
+            ).createDecoratedFeature(
+                DepthsDecorators.LOWER_SURFACE_SCATTER.configure(
                     LowerSurfaceScatterDecoratorConfig(256)
                 )
             )
@@ -39,10 +45,10 @@ class FungalBlanketBiome: Biome(
 
         this.addFeature(
             GenerationStep.Feature.RAW_GENERATION,
-            DepthsFeatures.MOSS_PATCH.method_23397(
+            DepthsFeatures.MOSS_PATCH.configure(
                 ScatterFeatureConfig(Blocks.BROWN_MUSHROOM.defaultState)
-            ).method_23388(
-                DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
+            ).createDecoratedFeature(
+                DepthsDecorators.LOWER_SURFACE_SCATTER.configure(
                     LowerSurfaceScatterDecoratorConfig(16)
                 )
             )
@@ -50,10 +56,10 @@ class FungalBlanketBiome: Biome(
 
         this.addFeature(
             GenerationStep.Feature.RAW_GENERATION,
-            DepthsFeatures.MOSS_PATCH.method_23397(
+            DepthsFeatures.MOSS_PATCH.configure(
                 ScatterFeatureConfig(Blocks.RED_MUSHROOM.defaultState)
-            ).method_23388(
-                DepthsDecorators.LOWER_SURFACE_SCATTER.method_23475(
+            ).createDecoratedFeature(
+                DepthsDecorators.LOWER_SURFACE_SCATTER.configure(
                     LowerSurfaceScatterDecoratorConfig(16)
                 )
             )

@@ -1,21 +1,17 @@
 package redstoneparadox.thedepths.world.gen.decorator
 
-import com.mojang.datafixers.Dynamic
+import com.mojang.serialization.Codec
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IWorld
+import net.minecraft.world.WorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig
 import net.minecraft.world.gen.decorator.Decorator
-import net.minecraft.world.gen.decorator.DecoratorConfig
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig
 import redstoneparadox.thedepths.last
 import java.util.*
-import java.util.function.Function
 import java.util.stream.Stream
 
-open class LowerSurfaceDecorator<DC: LowerSurfaceDecoratorConfig>(func: Function<Dynamic<*>, out DC>): Decorator<DC>(func) {
+open class LowerSurfaceDecorator<DC: LowerSurfaceDecoratorConfig>(codec: Codec<DC>): Decorator<DC>(codec) {
 
-    override fun getPositions(world: IWorld, chunkGenerator: ChunkGenerator<out ChunkGeneratorConfig>, random: Random, config: DC, pos: BlockPos): Stream<BlockPos> {
+    override fun getPositions(world: WorldAccess, chunkGenerator: ChunkGenerator, random: Random, config: DC, pos: BlockPos): Stream<BlockPos> {
         val startPos = BlockPos.Mutable(pos.x + random.nextInt(15), pos.y, pos.z + random.nextInt(15))
         val biome = world.getBiome(startPos)
 

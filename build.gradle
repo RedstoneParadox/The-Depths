@@ -44,11 +44,7 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
-    modImplementation("com.github.Draylar:world-traveler:1.0.4") {
-        transitive = false
-    }
-
-    modImplementation 'grondag:jmx:1.1.69+19w39a'
+    modImplementation "grondag:jmx-mc116:${project.jmx}"
 }
 
 processResources {
