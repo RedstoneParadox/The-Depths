@@ -1,7 +1,7 @@
 package redstoneparadox.thedepths.world.gen.decorator
 
 import net.minecraft.util.registry.Registry
-import redstoneparadox.thedepths.id
+import redstoneparadox.thedepths.util.id
 
 object DepthsDecorators {
 
@@ -9,7 +9,9 @@ object DepthsDecorators {
     val LOWER_SURFACE_SCATTER = LowerSurfaceScatterDecorator()
 
     fun init() {
-        Registry.register(Registry.DECORATOR, id("lower_surface"), LOWER_SURFACE)
-        Registry.register(Registry.DECORATOR, id("lower_surface_scatter"), LOWER_SURFACE_SCATTER)
+        Registry.register(Registry.DECORATOR,
+            id("lower_surface"), LOWER_SURFACE)
+        Registry.register(Registry.DECORATOR,
+            id("lower_surface_scatter"), LOWER_SURFACE_SCATTER)
     }
 }

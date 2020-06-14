@@ -1,8 +1,7 @@
 package redstoneparadox.thedepths.world.biome
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome
 import net.minecraft.util.registry.Registry
-import redstoneparadox.thedepths.id
+import redstoneparadox.thedepths.util.id
 
 object DepthsBiomes {
 

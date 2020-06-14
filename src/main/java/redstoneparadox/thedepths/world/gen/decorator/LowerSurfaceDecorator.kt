@@ -5,7 +5,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import net.minecraft.world.gen.decorator.Decorator
-import redstoneparadox.thedepths.last
+import redstoneparadox.thedepths.util.last
 import java.util.*
 import java.util.stream.Stream
 

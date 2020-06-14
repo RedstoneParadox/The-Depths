@@ -1,4 +1,4 @@
-package redstoneparadox.thedepths
+package redstoneparadox.thedepths.util
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.exceptions.CommandSyntaxException

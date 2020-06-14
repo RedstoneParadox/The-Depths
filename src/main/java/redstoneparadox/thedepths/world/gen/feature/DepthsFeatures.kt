@@ -1,7 +1,7 @@
 package redstoneparadox.thedepths.world.gen.feature
 
 import net.minecraft.util.registry.Registry
-import redstoneparadox.thedepths.id
+import redstoneparadox.thedepths.util.id
 
 object DepthsFeatures {
 
@@ -9,7 +9,9 @@ object DepthsFeatures {
     val MOSS_PATCH = ScatterFeature()
 
     fun init() {
-        Registry.register(Registry.FEATURE, id("crystal_column"), CRYSTAL_COLUMN)
-        Registry.register(Registry.FEATURE, id("moss_patch"), MOSS_PATCH)
+        Registry.register(Registry.FEATURE,
+            id("crystal_column"), CRYSTAL_COLUMN)
+        Registry.register(Registry.FEATURE,
+            id("moss_patch"), MOSS_PATCH)
     }
 }

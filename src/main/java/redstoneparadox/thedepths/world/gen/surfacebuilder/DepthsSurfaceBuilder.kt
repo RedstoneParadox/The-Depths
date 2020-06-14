@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.chunk.Chunk
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder
-import redstoneparadox.thedepths.offsetSeed
+import redstoneparadox.thedepths.util.offsetSeed
 import redstoneparadox.thedepths.world.noise.OpenSimplexSampler
 import java.util.*
 import kotlin.math.PI
