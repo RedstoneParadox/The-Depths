@@ -8,7 +8,7 @@ import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceBuilders
 import redstoneparadox.thedepths.world.gen.surfacebuilder.DepthsSurfaceConfig
 
 class DepthsBiome : Biome(
-    Biome.Settings()
+    Settings()
         .configureSurfaceBuilder(DepthsSurfaceBuilders.DEPTHS, DepthsSurfaceConfig())
         .precipitation(Precipitation.NONE)
         .category(Category.NONE)

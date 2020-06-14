@@ -14,7 +14,8 @@ open class DepthsSurfaceConfig(
     val cover: Optional<BlockState> = Optional.empty(),
     val fluid: Optional<BlockState> = Optional.empty(),
     val floorMinHeight: Int = 16,
-    val floorMaxHeight: Int = 18
+    val floorMaxHeight: Int = 18,
+    val pitCutoff: Double = 0.5
 ): SurfaceConfig {
     override fun getTopMaterial(): BlockState = primaryStone
 
@@ -23,12 +24,13 @@ open class DepthsSurfaceConfig(
     companion object {
         val CODEC: Codec<DepthsSurfaceConfig> = RecordCodecBuilder.create { instance ->
             return@create instance.group(
-                BlockState.CODEC.fieldOf("primaryStone").forGetter { config -> return@forGetter config.primaryStone },
-                BlockState.CODEC.fieldOf("secondaryStone").forGetter { config -> return@forGetter config.secondaryStone },
-                BlockState.CODEC.optionalFieldOf("cover").forGetter { config -> return@forGetter config.cover },
-                BlockState.CODEC.optionalFieldOf("fluid").forGetter { config -> return@forGetter config.fluid },
-                Codec.INT.fieldOf("floorMinHeight").forGetter { config -> return@forGetter config.floorMinHeight },
-                Codec.INT.fieldOf("floorMaxHeight").forGetter { config -> return@forGetter config.floorMaxHeight }
+                BlockState.CODEC.fieldOf("primaryStone").forGetter { it.primaryStone },
+                BlockState.CODEC.fieldOf("secondaryStone").forGetter { it.secondaryStone },
+                BlockState.CODEC.optionalFieldOf("cover").forGetter { it.cover },
+                BlockState.CODEC.optionalFieldOf("fluid").forGetter { it.fluid },
+                Codec.INT.fieldOf("floorMinHeight").forGetter { it.floorMinHeight },
+                Codec.INT.fieldOf("floorMaxHeight").forGetter { it.floorMaxHeight },
+                Codec.DOUBLE.fieldOf("pitCutoff").forGetter { it.pitCutoff }
             ).apply(instance, ::DepthsSurfaceConfig)
         }
     }

@@ -1,6 +1,6 @@
 package redstoneparadox.thedepths.world.noise
 
-class OpenSimplexSampler(seed: Long, private val xStrech: Double = 1.0, private val yStrech: Double = 1.0, private val zStrech: Double = 1.0, private val noiseMultiplier: Double = 1.0) {
+class OpenSimplexSampler(seed: Long = 0, private val xStrech: Double = 1.0, private val yStrech: Double = 1.0, private val zStrech: Double = 1.0, private val noiseMultiplier: Double = 1.0) {
 
     val noise = OpenSimplexNoise(seed)
 

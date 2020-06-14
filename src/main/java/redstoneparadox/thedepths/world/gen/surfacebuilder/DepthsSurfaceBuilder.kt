@@ -8,18 +8,17 @@ import net.minecraft.world.biome.Biome
 import net.minecraft.world.chunk.Chunk
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder
 import redstoneparadox.thedepths.offsetSeed
-import redstoneparadox.thedepths.world.noise.OpenSimplexNoise
 import redstoneparadox.thedepths.world.noise.OpenSimplexSampler
-import redstoneparadox.thedepths.world.noise.PitNoiseSampler
 import java.util.*
+import kotlin.math.PI
+import kotlin.math.cos
 
 class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBuilder<T>(codec) {
 
-    var pitSampler: PitNoiseSampler? = null
-    private var stoneSampler: OpenSimplexNoise? = null
-    private var lowerSurfaceNoise: OpenSimplexSampler? = null
-
-    val BEDROCK = Blocks.BEDROCK.defaultState
+    private var pitSampler: OpenSimplexSampler = OpenSimplexSampler()
+    private var stoneSampler: OpenSimplexSampler = OpenSimplexSampler()
+    private var lowerSurfaceSampler: OpenSimplexSampler = OpenSimplexSampler()
+    private val bedrock: BlockState = Blocks.BEDROCK.defaultState
 
     override fun generate(
         random: Random,
@@ -41,16 +40,24 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBui
 
         buildBedrock(chunk, x, y, z)
         if (chunk.getBlockState(BlockPos(x, y, z)).isAir) {
-            if (y >= 64) buildPits(chunk, primaryStone, secondaryStone, config.cover, x, y, z)
+            if (y >= 64) buildPits(chunk, primaryStone, secondaryStone, config.cover, x, y, z, config.pitCutoff)
             else buildLowerSurface(chunk, primaryStone, secondaryStone, liquid, config.cover, x, y, z, config.floorMinHeight, config.floorMaxHeight)
         }
     }
 
     override fun initSeed(seed: Long) {
-        if (pitSampler == null) pitSampler = PitNoiseSampler(seed, 0.5, 32.0)
-        if (stoneSampler == null) stoneSampler = OpenSimplexNoise(seed)
-        if (lowerSurfaceNoise == null) lowerSurfaceNoise = OpenSimplexSampler(
+        pitSampler = OpenSimplexSampler(
             seed = offsetSeed(seed, 1),
+            xStrech = 32.0,
+            zStrech = 32.0
+        )
+        stoneSampler = OpenSimplexSampler(
+            seed = seed,
+            xStrech = 12.0,
+            zStrech = 12.0
+        )
+        lowerSurfaceSampler = OpenSimplexSampler(
+            seed = offsetSeed(seed, 2),
             xStrech = 32.0,
             zStrech = 32.0,
             noiseMultiplier = 4.0
@@ -58,16 +65,16 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBui
     }
 
     private fun buildBedrock(chunk: Chunk, x: Int, y: Int, z: Int) {
-        if (y == 0 || y == 255) chunk.setBlockState(BlockPos(x, y, z), BEDROCK, true)
+        if (y == 0 || y == 255) chunk.setBlockState(BlockPos(x, y, z), bedrock, true)
     }
 
-    private fun buildPits(chunk: Chunk, primary: BlockState, secondary: BlockState, cover: Optional<BlockState>, x: Int, y: Int, z: Int) {
+    private fun buildPits(chunk: Chunk, primary: BlockState, secondary: BlockState, cover: Optional<BlockState>, x: Int, y: Int, z: Int, cutoff: Double) {
         val absolutePos = chunk.pos.toBlockPos(x, y, z)
-        if (pitSampler!!.isStone(absolutePos.x, y, absolutePos.z)) {
+        if (isStone(absolutePos.x, y, absolutePos.z, cutoff)) {
             val state = if (sampleDeepRockNoise(absolutePos.x, y, absolutePos.z)) {primary} else {secondary}
             chunk.setBlockState(BlockPos(x, y, z), state, true)
         }
-        else if (y in 232..247 && pitSampler!!.isStone(absolutePos.x, y - 1, absolutePos.z)) {
+        else if (y in 232..247 && isStone(absolutePos.x, y - 1, absolutePos.z, cutoff)) {
             cover.ifPresent {
                 chunk.setBlockState(BlockPos(x, y, z), it, true)
             }
@@ -82,7 +89,7 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBui
             chunk.setBlockState(BlockPos(x, y, z), state, true)
         }
         else if (y in minHeight..maxHeight) {
-            val height = lowerSurfaceNoise!!.eval(absolutePos.x, absolutePos.z)
+            val height = lowerSurfaceSampler.eval(absolutePos.x, absolutePos.z)
             if (y <= height.toInt() + minHeight) chunk.setBlockState(BlockPos(x, y, z), state, true)
             else if (y <= height.toInt() + 1 + minHeight) cover.ifPresent {
                 chunk.setBlockState(BlockPos(x, y, z), it, true)
@@ -94,8 +101,22 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBui
     }
 
     private fun sampleDeepRockNoise(x: Int, y: Int, z: Int): Boolean {
-        val stretch = 12.0
-        val cutoff = 0.5
-        return stoneSampler?.eval(x.toDouble()/stretch, y.toDouble()/stretch, z.toDouble()/stretch)!! < cutoff
+        return stoneSampler.eval(x, y, z) < 0.5
     }
+
+    private fun isStone(x: Int, y: Int, z: Int, cutoff: Double): Boolean = when (y) {
+        in 252..254 -> pitSampler.eval(x, z) < calculateCeilingSlope(calculatePitOffset(247, 16.0, cutoff), y - 248)
+        251 -> pitSampler.eval(x, z) < cutoff * 1.25
+        250 -> pitSampler.eval(x, z) < cutoff
+        249 -> pitSampler.eval(x, z) < cutoff * 0.5
+        248 -> pitSampler.eval(x, z) < cutoff * 0.25
+        in 232..247 -> pitSampler.eval(x, z) < calculatePitOffset(y - 232, 16.0, cutoff)
+        in 72..231 -> pitSampler.eval(x, z)  < cutoff
+        in 64..71 -> pitSampler.eval(x, z)  < cutoff - calculatePitOffset(y - 64, 8.0, cutoff)
+        else -> false
+    }
+
+    private fun calculatePitOffset(value: Int, divisor: Double, cutoff: Double): Double = (cos((PI * value)/divisor) + 1)/2 * (cutoff/2)
+
+    private fun calculateCeilingSlope(initial: Double, value: Int): Double = -(value * initial)/4 + value
 }
