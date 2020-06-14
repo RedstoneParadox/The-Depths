@@ -19,7 +19,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "redstoneparadox.thedepths.TheDepthsKt::init"
+      {
+        "adapter": "kotlin",
+        "value": "redstoneparadox.thedepths.TheDepths"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "redstoneparadox.thedepths.client.TheDepthsClient"
+      }
     ]
   },
   "mixins": [

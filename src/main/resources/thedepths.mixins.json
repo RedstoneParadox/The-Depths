@@ -3,6 +3,7 @@
   "package": "redstoneparadox.thedepths.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "client.render.AccessorSkyProperties"
   ],
   "client": [
   ],

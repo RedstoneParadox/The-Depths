@@ -2,6 +2,8 @@ package redstoneparadox.thedepths.world.biome
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.data.server.LootTablesProvider
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.source.BiomeSource
 import net.minecraft.world.gen.feature.StructureFeature
@@ -21,15 +23,11 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(mutableListOf(DepthsBiomes.
     )
 
     init {
-        addBiomeRange(0..227, DepthsBiomes.DEPTHS_BIOME)
+        addBiomeRange(0..255, DepthsBiomes.DEPTHS_BIOME)
         // addBiomeRange(0..63, DepthsBiomes.CRYSTAL_BIOME)
         // addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
-        addBiomeRange(228..255, DepthsBiomes.FUNGAL_BLANKET_BIOME)
-        addBiomeRange(0..63, DepthsBiomes.FUNGAL_BLANKET_BIOME)
-    }
-
-    fun getStoredBiome(x: Int, y: Int, z: Int): Biome {
-        return getBiome(x * 4, y * 4, z * 4)
+        //addBiomeRange(228..255, DepthsBiomes.FUNGAL_BLANKET_BIOME)
+        //addBiomeRange(0..63, DepthsBiomes.FUNGAL_BLANKET_BIOME)
     }
 
     private fun getBiome(x: Int, y: Int, z: Int): Biome {
