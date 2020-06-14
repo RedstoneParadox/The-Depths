@@ -1,0 +1,6 @@
+{
+  "parent": "thedepths:block/template_wall_side_tall",
+  "textures": {
+    "wall": "thedepths:block/deep_rock_bricks"
+  }
+}
