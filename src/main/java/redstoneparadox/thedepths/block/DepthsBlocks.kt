@@ -1,21 +1,21 @@
 package redstoneparadox.thedepths.block
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
 
 object DepthsBlocks: BlocksInitializer() {
 
-    val DEEP_ROCK: Block = Block(FabricBlockSettings.copy(Blocks.STONE).build())
-    val DEEP_ROCK_SLAB: SlabBlock = SlabBlock(FabricBlockSettings.copy(Blocks.STONE_SLAB).build())
-    val DEEP_ROCK_STAIRS: StairsBlock = object : StairsBlock(DEEP_ROCK.defaultState, FabricBlockSettings.copy(Blocks.STONE_BRICKS).build()) {}
-    val DEEP_ROCK_BRICKS: Block = Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS).build())
-    val DEEP_ROCK_BRICK_SLAB: SlabBlock = SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_SLAB).build())
-    val DEEP_ROCK_BRICK_STAIRS: StairsBlock = object : StairsBlock(DEEP_ROCK_BRICKS.defaultState, FabricBlockSettings.copy(Blocks.STONE_BRICKS).build()) {}
-    val DEEP_ROCK_BRICK_WALL: WallBlock = WallBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL).build())
+    val DEEP_ROCK: Block = Block(FabricBlockSettings.copy(Blocks.STONE))
+    val DEEP_ROCK_SLAB: SlabBlock = SlabBlock(FabricBlockSettings.copy(Blocks.STONE_SLAB))
+    val DEEP_ROCK_STAIRS: StairsBlock = object : StairsBlock(DEEP_ROCK.defaultState, FabricBlockSettings.copy(Blocks.STONE_BRICKS)) {}
+    val DEEP_ROCK_BRICKS: Block = Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS))
+    val DEEP_ROCK_BRICK_SLAB: SlabBlock = SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_SLAB))
+    val DEEP_ROCK_BRICK_STAIRS: StairsBlock = object : StairsBlock(DEEP_ROCK_BRICKS.defaultState, FabricBlockSettings.copy(Blocks.STONE_BRICKS)) {}
+    val DEEP_ROCK_BRICK_WALL: WallBlock = WallBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL))
 
-    val RED_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE).build())
-    val BLUE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE).build())
-    val WHITE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE).build())
+    val RED_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE))
+    val BLUE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE))
+    val WHITE_CRYSTAL: CrystalBlock = CrystalBlock(FabricBlockSettings.copy(Blocks.STONE))
 
     val MOSS: MossBlock = MossBlock()
 
