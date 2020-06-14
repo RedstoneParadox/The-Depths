@@ -13,7 +13,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
-class DepthsBiomeSource(val seed: Long): BiomeSource(mutableListOf(DepthsBiomes.DEPTHS_BIOME, DepthsBiomes.LUMA_BIOME)) {
+class DepthsBiomeSource(val seed: Long): BiomeSource(listOf(DepthsBiomes.DEPTHS_BIOME)) {
 
     val biomeRangeMap: HashMap<Int, ArrayList<Biome>> = hashMapOf()
     val simplexSampler: OpenSimplexSampler = OpenSimplexSampler(
@@ -24,10 +24,6 @@ class DepthsBiomeSource(val seed: Long): BiomeSource(mutableListOf(DepthsBiomes.
 
     init {
         addBiomeRange(0..255, DepthsBiomes.DEPTHS_BIOME)
-        // addBiomeRange(0..63, DepthsBiomes.CRYSTAL_BIOME)
-        // addBiomeRange(228..255, DepthsBiomes.LUMA_BIOME)
-        //addBiomeRange(228..255, DepthsBiomes.FUNGAL_BLANKET_BIOME)
-        //addBiomeRange(0..63, DepthsBiomes.FUNGAL_BLANKET_BIOME)
     }
 
     private fun getBiome(x: Int, y: Int, z: Int): Biome {

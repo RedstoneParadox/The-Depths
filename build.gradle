@@ -44,6 +44,11 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
+    modImplementation ("com.terraformersmc:terraform:${project.terraform}") {
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+    include "com.terraformersmc:terraform:${project.terraform}"
+
     /*
     modApi ("grondag:frex-${project.mc_tag}:${project.frex}.+") { transitive = false}
     // remove next line if you want JMX to be an optional dependency
