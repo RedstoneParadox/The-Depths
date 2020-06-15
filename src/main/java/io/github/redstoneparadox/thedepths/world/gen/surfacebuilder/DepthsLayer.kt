@@ -7,7 +7,6 @@ import io.github.redstoneparadox.thedepths.util.Codecs
 data class DepthsLayer(val range: IntRange, val holes: Boolean, val connected: Boolean, val filled: Boolean) {
     companion object {
         val CODEC: Codec<DepthsLayer> = RecordCodecBuilder.create { instance ->
-
             instance.group(
                 Codecs.INT_RANGE.fieldOf("range").forGetter { it.range },
                 Codec.BOOL.fieldOf("holes").forGetter { it.holes },
