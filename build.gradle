@@ -49,7 +49,6 @@ dependencies {
     }
     include "com.terraformersmc:terraform:${project.terraform}"
 
-    /*
     modApi ("grondag:frex-${project.mc_tag}:${project.frex}.+") { transitive = false}
     // remove next line if you want JMX to be an optional dependency
     include "grondag:frex-${project.mc_tag}:${project.frex}.+"
@@ -57,7 +56,6 @@ dependencies {
     modImplementation ("grondag:jmx-${project.mc_tag}:${project.jmx}.+") { transitive = false}
     // remove next line if you want JMX to be an optional dependency
     include "grondag:jmx-${project.mc_tag}:${project.jmx}.+"
-     */
 }
 
 processResources {
