@@ -18,7 +18,7 @@ class DepthsBiome : Biome(
         .downfall(0.0f)
         .effects(
             BiomeEffects.Builder()
-                .fogColor(0x33334d)
+                .fogColor(0x2b2b3b)
                 .waterColor(4159204)
                 .waterFogColor(329011)
                 .build()
