@@ -81,21 +81,34 @@ class DepthsSurfaceBuilder<T: DepthsSurfaceConfig>(codec: Codec<T>) : SurfaceBui
         }
     }
 
+    private fun buildLayer(chunk: Chunk, layer: DepthsLayer, primaryStone: BlockState, secondaryStone: BlockState, liquid: Optional<BlockState>, x: Int, y: Int, z: Int) {
+        if (!layer.range.contains(y)) {
+            return
+        }
+
+        val pos = chunk.pos.toBlockPos(x, y, z)
+        val state = if (sampleDeepRockNoise(pos.x, y, pos.z)) { primaryStone } else { secondaryStone }
+
+
+    }
+
     private fun buildLowerSurface(chunk: Chunk, primaryStone: BlockState, secondaryStone: BlockState, liquid: Optional<BlockState>, cover: Optional<BlockState>, x: Int, y: Int, z: Int, minHeight: Int, maxHeight: Int) {
-        val absolutePos = chunk.pos.toBlockPos(x, y, z)
-        val state = if (sampleDeepRockNoise(absolutePos.x, y, absolutePos.z)) {primaryStone} else {secondaryStone}
+        val pos = chunk.pos.toBlockPos(x, y, z)
+        val state = if (sampleDeepRockNoise(pos.x, y, pos.z)) { primaryStone } else { secondaryStone }
 
         if (y < minHeight) {
             chunk.setBlockState(BlockPos(x, y, z), state, true)
         }
         else if (y in minHeight..maxHeight) {
-            val height = lowerSurfaceSampler.eval(absolutePos.x, absolutePos.z)
-            if (y <= height.toInt() + minHeight) chunk.setBlockState(BlockPos(x, y, z), state, true)
-            else if (y <= height.toInt() + 1 + minHeight) cover.ifPresent {
-                chunk.setBlockState(BlockPos(x, y, z), it, true)
-            }
-            else if (y < 16) liquid.ifPresent {
-                chunk.setBlockState(BlockPos(x, y, z), it, true)
+            val height = lowerSurfaceSampler.eval(pos.x, pos.z)
+            when {
+                y <= height.toInt() + minHeight -> chunk.setBlockState(BlockPos(x, y, z), state, true)
+                y <= height.toInt() + 1 + minHeight -> cover.ifPresent {
+                    chunk.setBlockState(BlockPos(x, y, z), it, true)
+                }
+                y < 16 -> liquid.ifPresent {
+                    chunk.setBlockState(BlockPos(x, y, z), it, true)
+                }
             }
         }
     }
