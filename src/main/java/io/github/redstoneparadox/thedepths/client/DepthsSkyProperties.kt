@@ -3,7 +3,7 @@ package io.github.redstoneparadox.thedepths.client
 import net.minecraft.client.render.SkyProperties
 import net.minecraft.util.math.Vec3d
 
-class DepthsSkyProperties: SkyProperties(Float.NaN, false, class_5401.NONE, false, true) {
+class DepthsSkyProperties: SkyProperties(Float.NaN, false, SkyType.NONE, false, true) {
     override fun useThickFog(i: Int, j: Int): Boolean {
         return true
     }
